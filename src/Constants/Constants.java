@@ -5,6 +5,7 @@ import java.awt.*;
 public class Constants {
     public static class Fonts {
         public static final Font LOGIN_FONT = new Font("MV Boli", Font.PLAIN, 25);
+        public static final Font MENU_FONT = new Font("Mv Boli", Font.BOLD, 25);
     }
     public static class FrameSizes {
         public static final int DEFAULT_FRAME_WIDTH = 800;

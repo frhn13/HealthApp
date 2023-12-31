@@ -1,5 +1,7 @@
 package Login;
 
+import MainPage.MainMenu;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -18,7 +20,7 @@ public class LoginPage extends JFrame implements ActionListener {
     JPanel loginPanel;
 
     JTextField usernameField;
-    JTextField passwordField;
+    JPasswordField passwordField;
     JLabel usernameLabel;
     JLabel passwordLabel;
     JButton loginButton;
@@ -43,7 +45,7 @@ public class LoginPage extends JFrame implements ActionListener {
         passwordLabel.setFont(LOGIN_FONT);
         usernameField = new JTextField("Username");
         usernameField.setFont(LOGIN_FONT);
-        passwordField = new JTextField("Password");
+        passwordField = new JPasswordField("PasswordEnter");
         passwordField.setFont(LOGIN_FONT);
         loginButton = new JButton("Login");
         loginButton.setFont(LOGIN_FONT);
@@ -75,8 +77,10 @@ public class LoginPage extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == loginButton) {
-            if (passwordField.getText().equals(login_details.get(usernameField.getText())))
-                System.out.println("Logged in!");
+            if (passwordField.getText().equals(login_details.get(usernameField.getText()))) {
+                this.dispose();
+                new MainMenu(usernameField.getText());
+            }
             else
                 System.out.println("Login failed");
         }

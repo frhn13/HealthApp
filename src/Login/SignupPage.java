@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 import static Constants.Constants.Fonts.LOGIN_FONT;
 import static Constants.Constants.FrameSizes.LOGIN_SIZE;
@@ -17,8 +18,8 @@ public class SignupPage extends JFrame implements ActionListener {
     JPanel loginPanel;
 
     JTextField usernameField;
-    JTextField passwordField;
-    JTextField confirmPasswordField;
+    JPasswordField passwordField;
+    JPasswordField confirmPasswordField;
     JLabel usernameLabel;
     JLabel passwordLabel;
     JLabel confirmPasswordLabel;
@@ -44,9 +45,9 @@ public class SignupPage extends JFrame implements ActionListener {
         passwordLabel.setFont(LOGIN_FONT);
         usernameField = new JTextField("Username");
         usernameField.setFont(LOGIN_FONT);
-        passwordField = new JTextField("Password");
+        passwordField = new JPasswordField("PasswordEnter");
         passwordField.setFont(LOGIN_FONT);
-        confirmPasswordField = new JTextField("Password");
+        confirmPasswordField = new JPasswordField("PasswordEnter");
         confirmPasswordField.setFont(LOGIN_FONT);
         loginPage = new JButton("Login Page");
         loginPage.setFont(LOGIN_FONT);
@@ -78,7 +79,46 @@ public class SignupPage extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == signupButton) {
-
+            boolean isUpper = false;
+            boolean isLower = false;
+            boolean isNumeric = false;
+            boolean isSymbol = false;
+            boolean hasSpaces = false;
+            boolean validDetails = true;
+            if (!Arrays.equals(passwordField.getPassword(), confirmPasswordField.getPassword())) {
+                System.out.println("Passwords aren't the same");
+                validDetails = false;
+            }
+            for (int x=0; x<passwordField.getPassword().length-1; x++) {
+                if (Character.isUpperCase(passwordField.getPassword()[x])) isUpper = true;
+                if (Character.isLowerCase(passwordField.getPassword()[x])) isLower = true;
+                if (Character.isDigit(passwordField.getPassword()[x])) isNumeric = true;
+                if (passwordField.getPassword()[x] != 32 &&
+                        (passwordField.getPassword()[x] < 65 || passwordField.getPassword()[x] > 90) &&  //not an uppercase alphabet
+                        (passwordField.getPassword()[x] < 97 || passwordField.getPassword()[x] > 122)) isSymbol = true;  //not a lowercase alphabet)
+            }
+            if (!isLower || !isUpper || !isNumeric || !isSymbol) {
+                System.out.println("Password should contain at least one upper and lower case letter, one number and one special symbol.");
+                validDetails = false;
+            }
+            if (passwordField.getPassword().length > 20 || passwordField.getPassword().length < 8) {
+                System.out.println("Password should be between 8 and 20 characters.");
+                validDetails = false;
+            }
+            if (usernameField.getText().length() > 15 || usernameField.getText().length() < 5) {
+                System.out.println("Username should be between 5 and 15 characters.");
+                validDetails = false;
+            }
+            for (int x=0; x<usernameField.getText().length()-1; x++)
+                if (usernameField.getText().charAt(x) == ' ') hasSpaces = true;
+            if (hasSpaces) {
+                System.out.println("Username shouldn't have any spaces");
+                validDetails = false;
+            }
+            if (validDetails) {
+                this.dispose();
+                new LoginPage();
+            }
         }
         if (e.getSource() == loginPage) {
             this.dispose();
