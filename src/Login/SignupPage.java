@@ -4,11 +4,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
 import java.util.Arrays;
 
 import static Constants.Constants.Fonts.LOGIN_FONT;
 import static Constants.Constants.FrameSizes.LOGIN_SIZE;
 import static Constants.Constants.FrameSizes.SIGNUP_PANEL_SIZE;
+import static Files.FileFunctions.checkSignupFile;
 
 public class SignupPage extends JFrame implements ActionListener {
 
@@ -89,7 +91,7 @@ public class SignupPage extends JFrame implements ActionListener {
                 System.out.println("Passwords aren't the same");
                 validDetails = false;
             }
-            for (int x=0; x<passwordField.getPassword().length-1; x++) {
+            for (int x=0; x<passwordField.getPassword().length; x++) {
                 if (Character.isUpperCase(passwordField.getPassword()[x])) isUpper = true;
                 if (Character.isLowerCase(passwordField.getPassword()[x])) isLower = true;
                 if (Character.isDigit(passwordField.getPassword()[x])) isNumeric = true;
@@ -109,13 +111,14 @@ public class SignupPage extends JFrame implements ActionListener {
                 System.out.println("Username should be between 5 and 15 characters.");
                 validDetails = false;
             }
-            for (int x=0; x<usernameField.getText().length()-1; x++)
+            for (int x=0; x<usernameField.getText().length(); x++)
                 if (usernameField.getText().charAt(x) == ' ') hasSpaces = true;
             if (hasSpaces) {
                 System.out.println("Username shouldn't have any spaces");
                 validDetails = false;
             }
             if (validDetails) {
+                checkSignupFile(usernameField.getText(), passwordField.getText());
                 this.dispose();
                 new LoginPage();
             }

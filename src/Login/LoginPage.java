@@ -6,12 +6,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 import static Constants.Constants.Fonts.LOGIN_FONT;
 import static Constants.Constants.FrameSizes.LOGIN_SIZE;
 import static Constants.Constants.FrameSizes.LOGIN_PANEL_SIZE;
+import static Files.FileFunctions.checkLoginFile;
 
 public class LoginPage extends JFrame implements ActionListener {
 
@@ -25,9 +31,6 @@ public class LoginPage extends JFrame implements ActionListener {
     JLabel passwordLabel;
     JButton loginButton;
     JButton signupPage;
-
-    Map<String, String> login_details = new HashMap<>();
-
 
     public LoginPage() {
 
@@ -70,19 +73,36 @@ public class LoginPage extends JFrame implements ActionListener {
         this.add(loginPanel, BorderLayout.SOUTH);
         this.setVisible(true);
 
-        login_details.put("User1", "Password1");
-        login_details.put("User2", "Password2");
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == loginButton) {
-            if (passwordField.getText().equals(login_details.get(usernameField.getText()))) {
+            if (checkLoginFile(usernameField.getText(), passwordField.getText())) {
                 this.dispose();
                 new MainMenu(usernameField.getText());
             }
-            else
-                System.out.println("Login failed");
+//            String line;
+//            ArrayList<ArrayList<String>> users = new ArrayList<>();
+//
+//            try (BufferedReader br = new BufferedReader(new FileReader("csvFiles/users.csv"))) {
+//                while ((line = br.readLine()) != null) {
+//                    String[] row = line.split(","); // Comma is the delimiter between each attribute
+//                    ArrayList<String> details = new ArrayList<>();
+//                    details.add(row[0]);
+//                    details.add(row[1]);
+//                    users.add(details);
+//                }
+//                for (int x = 0; x < users.size(); x++) {
+//                    if (usernameField.getText().equals(users.get(x).get(0)) && passwordField.getText().equals(users.get(x).get(1))) {
+//                        this.dispose();
+//                        new MainMenu(usernameField.getText());
+//                    }
+//                }
+//                System.out.println("Login failed.");
+//            } catch (IOException ex) {
+//                System.out.println("No users exist yet.");
+//            }
         }
         if (e.getSource() == signupPage) {
             this.dispose();
