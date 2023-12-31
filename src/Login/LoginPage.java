@@ -6,13 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 import static Constants.Constants.Fonts.LOGIN_FONT;
 import static Constants.Constants.FrameSizes.LOGIN_SIZE;
@@ -82,27 +75,6 @@ public class LoginPage extends JFrame implements ActionListener {
                 this.dispose();
                 new MainMenu(usernameField.getText());
             }
-//            String line;
-//            ArrayList<ArrayList<String>> users = new ArrayList<>();
-//
-//            try (BufferedReader br = new BufferedReader(new FileReader("csvFiles/users.csv"))) {
-//                while ((line = br.readLine()) != null) {
-//                    String[] row = line.split(","); // Comma is the delimiter between each attribute
-//                    ArrayList<String> details = new ArrayList<>();
-//                    details.add(row[0]);
-//                    details.add(row[1]);
-//                    users.add(details);
-//                }
-//                for (int x = 0; x < users.size(); x++) {
-//                    if (usernameField.getText().equals(users.get(x).get(0)) && passwordField.getText().equals(users.get(x).get(1))) {
-//                        this.dispose();
-//                        new MainMenu(usernameField.getText());
-//                    }
-//                }
-//                System.out.println("Login failed.");
-//            } catch (IOException ex) {
-//                System.out.println("No users exist yet.");
-//            }
         }
         if (e.getSource() == signupPage) {
             this.dispose();
