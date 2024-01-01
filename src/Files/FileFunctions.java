@@ -49,4 +49,26 @@ public class FileFunctions {
             e.printStackTrace();
         }
     }
+    public static ArrayList<ArrayList<String>> readFromBMIFile(String username) {
+        String line;
+        ArrayList<ArrayList<String>> BMIValues = new ArrayList<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader("csvFiles/BMI_values.csv"))){
+            while ((line = br.readLine()) != null) {
+                String[] row = line.split(","); // Comma is the delimiter between each attribute
+                if (row[0].equals(username)) {
+                    ArrayList<String> BMIDetails = new ArrayList<>();
+                    BMIDetails.add(row[0]);
+                    BMIDetails.add(row[1]);
+                    BMIDetails.add(row[2]);
+                    BMIDetails.add(row[3]);
+                    BMIDetails.add(row[4]);
+                    BMIValues.add(BMIDetails);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("No BMI values entered yet.");
+        }
+        return BMIValues;
+    }
 }
