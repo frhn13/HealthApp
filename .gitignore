@@ -1,3 +1,5 @@
 /.idea/
 /out/
 *.iml
+/csvFiles/users.csv
+csvFiles/BMI_values.csv

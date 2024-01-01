@@ -36,8 +36,17 @@ public class FileFunctions {
             FileWriter writer = new FileWriter("csvFiles/users.csv", true);
             writer.write(username + "," + password + "\n");
             writer.close();
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void writeToBMIFile(String username, String height, String weight, String BMI, String date) {
+        try {
+            FileWriter writer = new FileWriter("csvFiles/BMI_values.csv", true);
+            writer.write(username + "," + height + "," + weight + "," + BMI + "," + date + "\n");
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

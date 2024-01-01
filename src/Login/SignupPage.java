@@ -42,8 +42,9 @@ public class SignupPage extends JFrame implements ActionListener {
         usernameLabel.setFont(LOGIN_FONT);
         passwordLabel = new JLabel("Password: ");
         passwordLabel.setFont(LOGIN_FONT);
-        confirmPasswordLabel = new JLabel("Confirm Password: ");
         passwordLabel.setFont(LOGIN_FONT);
+        confirmPasswordLabel = new JLabel("Confirm Password: ");
+        confirmPasswordLabel.setFont(LOGIN_FONT);
         usernameField = new JTextField("Username");
         usernameField.setFont(LOGIN_FONT);
         passwordField = new JPasswordField("PasswordEnter");

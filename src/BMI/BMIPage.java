@@ -6,11 +6,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.IllegalFormatConversionException;
 
 import static Constants.Constants.Fonts.BMI_FONT;
 import static Constants.Constants.Fonts.TITLE_FONT;
 import static Constants.Constants.FrameSizes.LOGIN_PANEL_SIZE;
 import static Constants.Constants.FrameSizes.LOGIN_SIZE;
+import static Files.FileFunctions.writeToBMIFile;
 
 public class BMIPage extends JFrame implements ActionListener {
 
@@ -25,6 +29,7 @@ public class BMIPage extends JFrame implements ActionListener {
     JButton viewPreviousBMI;
     JLabel BMIValue;
     JButton returnButton;
+    JLabel dateLabel;
 
     JPanel titlePanel;
     JPanel heightWeightPanel;
@@ -51,6 +56,7 @@ public class BMIPage extends JFrame implements ActionListener {
         BMIValue.setFont(BMI_FONT);
         BMIValue.setVisible(false);
         returnButton = new JButton("Return to Main Menu");
+        returnButton.setFont(BMI_FONT);
 
         submitBMI.addActionListener(this);
         viewPreviousBMI.addActionListener(this);
@@ -87,14 +93,38 @@ public class BMIPage extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == submitBMI) {
-            submitBMI.setVisible(false);
-            submitBMI.setEnabled(false);
-            double BMI = Double.parseDouble(weightField.getText()) / Math.pow(Double.parseDouble(heightField.getText())/100, 2);
-            BMIValue.setText("BMI: " + Math.round(BMI*100.0)/100.0);
-            BMIValue.setVisible(true);
+            try {
+                double BMI = Math.round((Double.parseDouble(weightField.getText()) / Math.pow(Double.parseDouble(heightField.getText()) / 100, 2)*100)/100);
+                if (BMI < 18.5) {
+                    BMIValue.setForeground(new Color(189, 0, 0, 255));
+                    BMIValue.setText("BMI: " + BMI + ", This indicates you are underweight");
+                }
+                else if (BMI <= 25) {
+                    BMIValue.setForeground(new Color(45, 224, 45, 255));
+                    BMIValue.setText("BMI: " + BMI + ", This indicates you have a healthy weight");
+                }
+                else if (BMI <= 30) {
+                    BMIValue.setForeground(new Color(204,204,0));
+                    BMIValue.setText("BMI: " + BMI + ", This indicates you are overweight");
+                }
+                else {
+                    BMIValue.setForeground(new Color(189, 0, 0, 255));
+                    BMIValue.setText("BMI: " + BMI + ", This indicates that you are obese");
+                }
+                submitBMI.setVisible(false);
+                submitBMI.setEnabled(false);
+                BMIValue.setVisible(true);
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                String date = dateFormat.format(Calendar.getInstance().getTime());
+                writeToBMIFile(username, heightField.getText(), weightField.getText(), String.valueOf(BMI), date);
+            }
+            catch (Exception ex) {
+                System.out.println("Height and weight entered must be numeric.");
+            }
         }
         if (e.getSource() == viewPreviousBMI) {
-
+            this.dispose();
+            new PrevBMI(username);
         }
         if (e.getSource() == returnButton) {
             this.dispose();
