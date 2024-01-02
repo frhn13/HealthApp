@@ -7,6 +7,7 @@ public class Constants {
         public static final Font LOGIN_FONT = new Font("MV Boli", Font.PLAIN, 25);
         public static final Font MENU_FONT = new Font("Mv Boli", Font.ITALIC, 25);
         public static final Font BMI_FONT = new Font("Mv Boli", Font.BOLD, 25);
+        public static final Font PREV_BMI_FONT = new Font("Mv Boli", Font.BOLD, 20);
         public static final Font TITLE_FONT = new Font("Mv Boli", Font.BOLD, 40);
     }
     public static class FrameSizes {

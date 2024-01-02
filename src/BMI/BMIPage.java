@@ -7,6 +7,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Calendar;
 import java.util.IllegalFormatConversionException;
 
@@ -30,6 +32,7 @@ public class BMIPage extends JFrame implements ActionListener {
     JLabel BMIValue;
     JButton returnButton;
     JLabel dateLabel;
+    JTextField dateField;
 
     JPanel titlePanel;
     JPanel heightWeightPanel;
@@ -48,6 +51,10 @@ public class BMIPage extends JFrame implements ActionListener {
         weightLabel.setFont(BMI_FONT);
         weightField = new JTextField("Weight");
         weightField.setFont(BMI_FONT);
+        dateLabel = new JLabel("Enter the date of the BMI: ");
+        dateLabel.setFont(BMI_FONT);
+        dateField = new JTextField("Date of the BMI");
+        dateField.setFont(BMI_FONT);
         submitBMI = new JButton("Calculate BMI");
         submitBMI.setFont(BMI_FONT);
         viewPreviousBMI = new JButton("View Previous BMIs");
@@ -75,6 +82,8 @@ public class BMIPage extends JFrame implements ActionListener {
         heightWeightPanel.add(heightField);
         heightWeightPanel.add(weightLabel);
         heightWeightPanel.add(weightField);
+        heightWeightPanel.add(dateLabel);
+        heightWeightPanel.add(dateField);
         submitPanel.add(BMIValue, BorderLayout.EAST);
         submitPanel.add(submitBMI, BorderLayout.WEST);
         submitPanel.add(viewPreviousBMI, BorderLayout.NORTH);
@@ -94,6 +103,9 @@ public class BMIPage extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == submitBMI) {
             try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                String enteredDate = dateField.getText();
+                formatter.parse(enteredDate);
                 double BMI = Math.round((Double.parseDouble(weightField.getText()) / Math.pow(Double.parseDouble(heightField.getText()) / 100, 2)*100)/100);
                 if (BMI < 18.5) {
                     BMIValue.setForeground(new Color(189, 0, 0, 255));
@@ -116,9 +128,12 @@ public class BMIPage extends JFrame implements ActionListener {
                 BMIValue.setVisible(true);
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                 String date = dateFormat.format(Calendar.getInstance().getTime());
-                writeToBMIFile(username, heightField.getText(), weightField.getText(), String.valueOf(BMI), date);
+                writeToBMIFile(username, heightField.getText(), weightField.getText(), String.valueOf(BMI), enteredDate);
             }
-            catch (Exception ex) {
+            catch (DateTimeParseException ex) {
+                System.out.println("Entered date must be valid.");
+            }
+            catch (NumberFormatException ex) {
                 System.out.println("Height and weight entered must be numeric.");
             }
         }
