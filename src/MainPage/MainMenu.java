@@ -38,12 +38,12 @@ public class MainMenu extends JFrame implements ActionListener {
         this.username = username;
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(DEFAULT_SIZE);
-        this.setLayout(new BorderLayout());
+        this.setLayout(new GridLayout(4, 1, 10, 100));
 
-        this.add(introLabel, BorderLayout.NORTH);
-        this.add(exerciseButton, BorderLayout.EAST);
-        this.add(BMIButton, BorderLayout.WEST);
-        this.add(logoutButton, BorderLayout.SOUTH);
+        this.add(introLabel);
+        this.add(exerciseButton);
+        this.add(BMIButton);
+        this.add(logoutButton);
 
         this.setVisible(true);
     }
@@ -60,7 +60,7 @@ public class MainMenu extends JFrame implements ActionListener {
         }
         if (e.getSource() == exerciseButton) {
             this.dispose();
-            new ExercisePage();
+            new ExercisePage(username);
         }
     }
 }

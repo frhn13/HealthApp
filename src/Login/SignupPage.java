@@ -7,12 +7,14 @@ import java.awt.event.ActionListener;
 import java.util.Arrays;
 
 import static Constants.Constants.Fonts.LOGIN_FONT;
+import static Constants.Constants.Fonts.TITLE_FONT;
 import static Constants.Constants.FrameSizes.LOGIN_SIZE;
 import static Constants.Constants.FrameSizes.SIGNUP_PANEL_SIZE;
 import static Files.FileFunctions.checkSignupFile;
 
 public class SignupPage extends JFrame implements ActionListener {
 
+    JPanel titlePanel;
     JPanel usernamePanel;
     JPanel passwordPanel;
     JPanel confirmPasswordPanel;
@@ -24,20 +26,25 @@ public class SignupPage extends JFrame implements ActionListener {
     JLabel usernameLabel;
     JLabel passwordLabel;
     JLabel confirmPasswordLabel;
+    JLabel titleLabel;
     JButton loginPage;
     JButton signupButton;
 
     SignupPage() {
+        titlePanel = new JPanel();
         usernamePanel = new JPanel();
         passwordPanel = new JPanel();
         confirmPasswordPanel = new JPanel();
         loginPanel = new JPanel();
 
+        titlePanel.setSize(SIGNUP_PANEL_SIZE);
         usernamePanel.setSize(SIGNUP_PANEL_SIZE);
         passwordPanel.setSize(SIGNUP_PANEL_SIZE);
         confirmPasswordPanel.setSize(SIGNUP_PANEL_SIZE);
         loginPanel.setSize(SIGNUP_PANEL_SIZE);
 
+        titleLabel = new JLabel("Sign-Up Page");
+        titleLabel.setFont(TITLE_FONT);
         usernameLabel = new JLabel("Username: ");
         usernameLabel.setFont(LOGIN_FONT);
         passwordLabel = new JLabel("Password: ");
@@ -60,8 +67,9 @@ public class SignupPage extends JFrame implements ActionListener {
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(LOGIN_SIZE);
-        this.setLayout(new BorderLayout());
+        this.setLayout(new GridLayout(5, 1, 10, 50));
 
+        titlePanel.add(titleLabel);
         usernamePanel.add(usernameLabel);
         usernamePanel.add(usernameField);
         passwordPanel.add(passwordLabel);
@@ -71,10 +79,11 @@ public class SignupPage extends JFrame implements ActionListener {
         loginPanel.add(signupButton);
         loginPanel.add(loginPage);
 
-        this.add(usernamePanel, BorderLayout.NORTH);
-        this.add(passwordPanel, BorderLayout.WEST);
-        this.add(confirmPasswordPanel, BorderLayout.EAST);
-        this.add(loginPanel, BorderLayout.SOUTH);
+        this.add(titlePanel);
+        this.add(usernamePanel);
+        this.add(passwordPanel);
+        this.add(confirmPasswordPanel);
+        this.add(loginPanel);
         this.setVisible(true);
     }
 
