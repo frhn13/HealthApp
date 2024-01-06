@@ -71,10 +71,10 @@ public class FileFunctions {
         }
         return BMIValues;
     }
-    public static void writeToExerciseFile(String exerciseType, int duration, String date) {
+    public static void writeToExerciseFile(String username, String exerciseType, int duration, String date) {
         try {
             FileWriter writer = new FileWriter("csvFiles/exercise_values.csv", true);
-            writer.write(exerciseType + "," + duration + "," + date + "\n");
+            writer.write(username + "," + exerciseType + "," + duration + "," + date + "\n");
             writer.close();
         }
         catch (IOException e) {
@@ -93,6 +93,7 @@ public class FileFunctions {
                     exerciseDetails.add(row[0]);
                     exerciseDetails.add(row[1]);
                     exerciseDetails.add(row[2]);
+                    exerciseDetails.add(row[3]);
                     exerciseValues.add(exerciseDetails);
                 }
             }

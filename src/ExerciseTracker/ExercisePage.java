@@ -103,7 +103,7 @@ public class ExercisePage extends JFrame implements ActionListener {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 String enteredDate = dateTextField.getText();
                 formatter.parse(enteredDate);
-                writeToExerciseFile(String.valueOf(exerciseComboBox.getSelectedItem()), Integer.parseInt(durationTextField.getText()), enteredDate);
+                writeToExerciseFile(username, String.valueOf(exerciseComboBox.getSelectedItem()), Integer.parseInt(durationTextField.getText()), enteredDate);
                 submitExerciseButton.setVisible(false);
                 submitExerciseButton.setEnabled(false);
             }
