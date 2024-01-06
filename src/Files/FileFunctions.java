@@ -71,4 +71,34 @@ public class FileFunctions {
         }
         return BMIValues;
     }
+    public static void writeToExerciseFile(String exerciseType, int duration, String date) {
+        try {
+            FileWriter writer = new FileWriter("csvFiles/exercise_values.csv", true);
+            writer.write(exerciseType + "," + duration + "," + date + "\n");
+            writer.close();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public static ArrayList<ArrayList<String>> readFromExerciseFile(String username) {
+        String line;
+        ArrayList<ArrayList<String>> exerciseValues = new ArrayList<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader("csvFiles/exercise_values.csv"))){
+            while ((line = br.readLine()) != null) {
+                String[] row = line.split(","); // Comma is the delimiter between each attribute
+                if (row[0].equals(username)) {
+                    ArrayList<String> exerciseDetails = new ArrayList<>();
+                    exerciseDetails.add(row[0]);
+                    exerciseDetails.add(row[1]);
+                    exerciseDetails.add(row[2]);
+                    exerciseValues.add(exerciseDetails);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("No BMI values entered yet.");
+        }
+        return exerciseValues;
+    }
 }

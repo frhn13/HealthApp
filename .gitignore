@@ -2,4 +2,5 @@
 /out/
 *.iml
 /csvFiles/users.csv
-csvFiles/BMI_values.csv
+/csvFiles/BMI_values.csv
+/csvFiles/exercise_values.csv

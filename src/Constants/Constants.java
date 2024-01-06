@@ -13,7 +13,7 @@ public class Constants {
         public static final Font PREV_EXERCISE_FONT = new Font("Mv Boli", Font.BOLD, 20);
     }
     public static class FrameSizes {
-        public static final int DEFAULT_FRAME_WIDTH = 800;
+        public static final int DEFAULT_FRAME_WIDTH = 900;
         public static final int DEFAULT_FRAME_HEIGHT = 600;
         public static final Dimension LOGIN_SIZE = new Dimension(DEFAULT_FRAME_WIDTH, DEFAULT_FRAME_HEIGHT);
         public static final Dimension DEFAULT_SIZE = new Dimension(DEFAULT_FRAME_WIDTH, DEFAULT_FRAME_HEIGHT);

@@ -6,9 +6,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Calendar;
 
 import static Constants.Constants.Fonts.*;
 import static Constants.Constants.FrameSizes.*;
+import static Files.FileFunctions.writeToExerciseFile;
 
 public class ExercisePage extends JFrame implements ActionListener {
 
@@ -45,15 +50,15 @@ public class ExercisePage extends JFrame implements ActionListener {
         exerciseLabel.setFont(EXERCISE_FONT);
         exerciseComboBox = new JComboBox(exercises);
         exerciseComboBox.setFont(EXERCISE_FONT);
-        exerciseDuration = new JLabel("Duration of exercise: ");
+        exerciseDuration = new JLabel("Duration of exercise in minutes: ");
         exerciseDuration.setFont(EXERCISE_FONT);
         durationTextField = new JTextField();
-        durationTextField.setSize(100, 100);
+        durationTextField.setSize(80, 100);
         durationTextField.setFont(EXERCISE_FONT);
         exerciseDate = new JLabel("Date of exercise: ");
         exerciseDate.setFont(EXERCISE_FONT);
         dateTextField = new JTextField();
-        dateTextField.setSize(100, 100);
+        dateTextField.setSize(80, 100);
         dateTextField.setFont(EXERCISE_FONT);
         submitExerciseButton = new JButton("Submit Exercise");
         submitExerciseButton.addActionListener(this);
@@ -94,7 +99,20 @@ public class ExercisePage extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == submitExerciseButton) {
-
+            try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                String enteredDate = dateTextField.getText();
+                formatter.parse(enteredDate);
+                writeToExerciseFile(String.valueOf(exerciseComboBox.getSelectedItem()), Integer.parseInt(durationTextField.getText()), enteredDate);
+                submitExerciseButton.setVisible(false);
+                submitExerciseButton.setEnabled(false);
+            }
+            catch (DateTimeParseException ex) {
+                System.out.println("Entered date must be valid.");
+            }
+            catch (NumberFormatException ex) {
+                System.out.println("Number of minutes spent exercising must be numeric.");
+            }
         }
         if (e.getSource() == mainMenuButton) {
             this.dispose();

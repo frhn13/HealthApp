@@ -126,8 +126,6 @@ public class BMIPage extends JFrame implements ActionListener {
                 submitBMI.setVisible(false);
                 submitBMI.setEnabled(false);
                 BMIValue.setVisible(true);
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                String date = dateFormat.format(Calendar.getInstance().getTime());
                 writeToBMIFile(username, heightField.getText(), weightField.getText(), String.valueOf(BMI), enteredDate);
             }
             catch (DateTimeParseException ex) {
