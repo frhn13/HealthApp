@@ -32,6 +32,7 @@ public class ExercisePage extends JFrame implements ActionListener {
     JButton submitExerciseButton;
     JButton mainMenuButton;
     JButton previousExercisesButton;
+    JButton monthlyExercisesButton;
 
 
     // Record hours spent exercising and on which area each day (use radio buttons)
@@ -69,6 +70,9 @@ public class ExercisePage extends JFrame implements ActionListener {
         previousExercisesButton = new JButton("View Previous Exercises");
         previousExercisesButton.addActionListener(this);
         previousExercisesButton.setFont(PREV_EXERCISE_FONT);
+        monthlyExercisesButton = new JButton("Monthly Exercise Report");
+        monthlyExercisesButton.addActionListener(this);
+        monthlyExercisesButton.setFont(PREV_EXERCISE_FONT);
 
         titlePanel = new JPanel(new GridLayout(2, 1, 10, 10));
         titlePanel.setSize(SIGNUP_PANEL_SIZE);
@@ -82,10 +86,11 @@ public class ExercisePage extends JFrame implements ActionListener {
         exercisePanel.add(durationTextField);
         exercisePanel.add(exerciseDate);
         exercisePanel.add(dateTextField);
-        bottomPanel = new JPanel(new FlowLayout());
+        bottomPanel = new JPanel(new GridLayout(2, 2, 20, 20));
         bottomPanel.add(submitExerciseButton);
         bottomPanel.add(mainMenuButton);
         bottomPanel.add(previousExercisesButton);
+        bottomPanel.add(monthlyExercisesButton);
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(DEFAULT_SIZE);
@@ -121,6 +126,10 @@ public class ExercisePage extends JFrame implements ActionListener {
         if (e.getSource() == previousExercisesButton) {
             this.dispose();
             new PrevExercises(username);
+        }
+        if (e.getSource() == monthlyExercisesButton) {
+            this.dispose();
+            new MonthlyExerciseReport(username);
         }
     }
 }
