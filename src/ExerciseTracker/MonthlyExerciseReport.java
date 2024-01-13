@@ -6,11 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
-import java.util.Date;
 
 import static Constants.Constants.Fonts.*;
 import static Constants.Constants.FrameSizes.DEFAULT_SIZE;
@@ -161,7 +157,8 @@ public class MonthlyExerciseReport extends JFrame implements ActionListener {
                 }
             }
             catch (NumberFormatException ex) {
-                System.out.println("Month and year entered must be in a numeric form.");
+                JOptionPane.showMessageDialog(null, "Month and year entered must be in a numeric form.",
+                        "Values invalid", JOptionPane.QUESTION_MESSAGE);
             }
         }
         if (e.getSource() == exerciseButton) {

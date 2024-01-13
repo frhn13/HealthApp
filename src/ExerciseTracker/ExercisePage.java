@@ -113,10 +113,12 @@ public class ExercisePage extends JFrame implements ActionListener {
                 submitExerciseButton.setEnabled(false);
             }
             catch (DateTimeParseException ex) {
-                System.out.println("Entered date must be valid.");
+                JOptionPane.showMessageDialog(null, "Entered date must be valid.",
+                        "Invalid Date", JOptionPane.ERROR_MESSAGE);
             }
             catch (NumberFormatException ex) {
-                System.out.println("Number of minutes spent exercising must be numeric.");
+                JOptionPane.showMessageDialog(null, "Number of minutes spent exercising must be numeric.",
+                        "Invalid Exercise duration", JOptionPane.ERROR_MESSAGE);
             }
         }
         if (e.getSource() == mainMenuButton) {

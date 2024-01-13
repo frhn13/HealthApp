@@ -33,9 +33,9 @@ public class SignupPage extends JFrame implements ActionListener {
 
     SignupPage() {
         titlePanel = new JPanel();
-        usernamePanel = new JPanel();
-        passwordPanel = new JPanel();
-        confirmPasswordPanel = new JPanel();
+        usernamePanel = new JPanel(new GridLayout(1, 2, 10, 10));
+        passwordPanel = new JPanel(new GridLayout(1, 2, 10, 10));
+        confirmPasswordPanel = new JPanel(new GridLayout(1, 2, 10, 10));
         loginPanel = new JPanel();
 
         titlePanel.setSize(SIGNUP_PANEL_SIZE);
@@ -53,11 +53,11 @@ public class SignupPage extends JFrame implements ActionListener {
         passwordLabel.setFont(LOGIN_FONT);
         confirmPasswordLabel = new JLabel("Confirm Password: ");
         confirmPasswordLabel.setFont(LOGIN_FONT);
-        usernameField = new JTextField("Username");
+        usernameField = new JTextField();
         usernameField.setFont(LOGIN_FONT);
-        passwordField = new JPasswordField("PasswordEnter");
+        passwordField = new JPasswordField();
         passwordField.setFont(LOGIN_FONT);
-        confirmPasswordField = new JPasswordField("PasswordEnter");
+        confirmPasswordField = new JPasswordField();
         confirmPasswordField.setFont(LOGIN_FONT);
         loginPage = new JButton("Login Page");
         loginPage.setFont(LOGIN_FONT);
@@ -124,19 +124,19 @@ public class SignupPage extends JFrame implements ActionListener {
             }
             if (usernameField.getText().length() > 15 || usernameField.getText().length() < 5) {
                 JOptionPane.showMessageDialog(null, "Username should be between 5 and 15 characters.",
-                        "Invalid Password", JOptionPane.ERROR_MESSAGE);
+                        "Invalid Username", JOptionPane.ERROR_MESSAGE);
                 validDetails = false;
             }
             for (int x=0; x<usernameField.getText().length(); x++)
                 if (usernameField.getText().charAt(x) == ' ') hasSpaces = true;
             if (hasSpaces) {
                 JOptionPane.showMessageDialog(null, "Username shouldn't have any spaces.",
-                        "Invalid Password", JOptionPane.ERROR_MESSAGE);
+                        "Invalid Username", JOptionPane.ERROR_MESSAGE);
                 validDetails = false;
             }
             if (checkSignupDetails(usernameField.getText())) {
                 JOptionPane.showMessageDialog(null, "Username already exists.",
-                        "Invalid Password", JOptionPane.ERROR_MESSAGE);
+                        "Invalid Username", JOptionPane.ERROR_MESSAGE);
                 validDetails = false;
             }
             if (validDetails) {

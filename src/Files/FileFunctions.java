@@ -25,12 +25,12 @@ public class FileFunctions {
                     return true;
                 }
             }
-            JOptionPane.showMessageDialog(null, "Login failed.",
-                    "Invalid Password", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Invalid login details.",
+                    "Login Failed", JOptionPane.ERROR_MESSAGE);
             return false;
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Login failed.",
-                    "No users exist yet.", JOptionPane.QUESTION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "No users exist yet.",
+                    "Login Failed", JOptionPane.QUESTION_MESSAGE);
             return false;
         }
     }
@@ -92,7 +92,8 @@ public class FileFunctions {
                 }
             }
         } catch (IOException e) {
-            System.out.println("No BMI values entered yet.");
+            JOptionPane.showMessageDialog(null, "No BMI values entered yet.",
+                    "BMI not Found", JOptionPane.QUESTION_MESSAGE);
         }
         return BMIValues;
     }
@@ -123,7 +124,8 @@ public class FileFunctions {
                 }
             }
         } catch (IOException e) {
-            System.out.println("No BMI values entered yet.");
+            JOptionPane.showMessageDialog(null, "No exercise values entered yet.",
+                    "Exercise not Found", JOptionPane.QUESTION_MESSAGE);
         }
         return exerciseValues;
     }

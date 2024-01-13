@@ -6,11 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Calendar;
-import java.util.IllegalFormatConversionException;
 
 import static Constants.Constants.Fonts.BMI_FONT;
 import static Constants.Constants.Fonts.TITLE_FONT;
@@ -45,15 +42,15 @@ public class BMIPage extends JFrame implements ActionListener {
         informationLabel.setFont(BMI_FONT);
         heightLabel = new JLabel("Enter your height in centimetres: ");
         heightLabel.setFont(BMI_FONT);
-        heightField = new JTextField("Height");
+        heightField = new JTextField();
         heightField.setFont(BMI_FONT);
         weightLabel = new JLabel("Enter your weight in kilograms: ");
         weightLabel.setFont(BMI_FONT);
-        weightField = new JTextField("Weight");
+        weightField = new JTextField();
         weightField.setFont(BMI_FONT);
         dateLabel = new JLabel("Enter the date of the BMI: ");
         dateLabel.setFont(BMI_FONT);
-        dateField = new JTextField("Date of the BMI");
+        dateField = new JTextField();
         dateField.setFont(BMI_FONT);
         submitBMI = new JButton("Calculate BMI");
         submitBMI.setFont(BMI_FONT);
@@ -71,7 +68,7 @@ public class BMIPage extends JFrame implements ActionListener {
 
         titlePanel = new JPanel(new BorderLayout());
         titlePanel.setSize(LOGIN_PANEL_SIZE);
-        heightWeightPanel = new JPanel();
+        heightWeightPanel = new JPanel(new GridLayout(3, 2, 10, 10));
         heightWeightPanel.setSize(LOGIN_PANEL_SIZE);
         submitPanel = new JPanel(new BorderLayout());
         submitPanel.setSize(LOGIN_PANEL_SIZE);
@@ -129,10 +126,12 @@ public class BMIPage extends JFrame implements ActionListener {
                 writeToBMIFile(username, heightField.getText(), weightField.getText(), String.valueOf(BMI), enteredDate);
             }
             catch (DateTimeParseException ex) {
-                System.out.println("Entered date must be valid.");
+                JOptionPane.showMessageDialog(null, "Entered date must be valid.",
+                        "Invalid Date", JOptionPane.ERROR_MESSAGE);
             }
             catch (NumberFormatException ex) {
-                System.out.println("Height and weight entered must be numeric.");
+                JOptionPane.showMessageDialog(null, "Height and weight entered must be numeric.",
+                        "Invalid BMI values", JOptionPane.ERROR_MESSAGE);
             }
         }
         if (e.getSource() == viewPreviousBMI) {

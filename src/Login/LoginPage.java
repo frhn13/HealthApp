@@ -31,8 +31,8 @@ public class LoginPage extends JFrame implements ActionListener {
     public LoginPage() {
 
         titlePanel = new JPanel();
-        usernamePanel = new JPanel();
-        passwordPanel = new JPanel();
+        usernamePanel = new JPanel(new GridLayout(1, 2, 10, 10));
+        passwordPanel = new JPanel(new GridLayout(1, 2, 10, 10));
         loginPanel = new JPanel();
 
         titlePanel.setSize(LOGIN_PANEL_SIZE);
@@ -46,9 +46,9 @@ public class LoginPage extends JFrame implements ActionListener {
         usernameLabel.setFont(LOGIN_FONT);
         passwordLabel = new JLabel("Password: ");
         passwordLabel.setFont(LOGIN_FONT);
-        usernameField = new JTextField("Username");
+        usernameField = new JTextField();
         usernameField.setFont(LOGIN_FONT);
-        passwordField = new JPasswordField("PasswordEnter");
+        passwordField = new JPasswordField();
         passwordField.setFont(LOGIN_FONT);
         loginButton = new JButton("Login");
         loginButton.setFont(LOGIN_FONT);
