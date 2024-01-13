@@ -10,6 +10,7 @@ import static Constants.Constants.Fonts.LOGIN_FONT;
 import static Constants.Constants.Fonts.TITLE_FONT;
 import static Constants.Constants.FrameSizes.LOGIN_SIZE;
 import static Constants.Constants.FrameSizes.SIGNUP_PANEL_SIZE;
+import static Files.FileFunctions.checkSignupDetails;
 import static Files.FileFunctions.checkSignupFile;
 
 public class SignupPage extends JFrame implements ActionListener {
@@ -97,7 +98,9 @@ public class SignupPage extends JFrame implements ActionListener {
             boolean hasSpaces = false;
             boolean validDetails = true;
             if (!Arrays.equals(passwordField.getPassword(), confirmPasswordField.getPassword())) {
-                System.out.println("Passwords aren't the same");
+                JOptionPane.showMessageDialog(null,
+                        "Passwords aren't the same.",
+                        "Invalid Password", JOptionPane.ERROR_MESSAGE);
                 validDetails = false;
             }
             for (int x=0; x<passwordField.getPassword().length; x++) {
@@ -109,21 +112,31 @@ public class SignupPage extends JFrame implements ActionListener {
                         (passwordField.getPassword()[x] < 97 || passwordField.getPassword()[x] > 122)) isSymbol = true;  //not a lowercase alphabet)
             }
             if (!isLower || !isUpper || !isNumeric || !isSymbol) {
-                System.out.println("Password should contain at least one upper and lower case letter, one number and one special symbol.");
+                JOptionPane.showMessageDialog(null,
+                        "Password should contain at least one upper and lower case letter, one number and one special symbol.",
+                        "Invalid Password", JOptionPane.ERROR_MESSAGE);
                 validDetails = false;
             }
             if (passwordField.getPassword().length > 20 || passwordField.getPassword().length < 8) {
-                System.out.println("Password should be between 8 and 20 characters.");
+                JOptionPane.showMessageDialog(null, "Password should be between 8 and 20 characters.",
+                        "Invalid Password", JOptionPane.ERROR_MESSAGE);
                 validDetails = false;
             }
             if (usernameField.getText().length() > 15 || usernameField.getText().length() < 5) {
-                System.out.println("Username should be between 5 and 15 characters.");
+                JOptionPane.showMessageDialog(null, "Username should be between 5 and 15 characters.",
+                        "Invalid Password", JOptionPane.ERROR_MESSAGE);
                 validDetails = false;
             }
             for (int x=0; x<usernameField.getText().length(); x++)
                 if (usernameField.getText().charAt(x) == ' ') hasSpaces = true;
             if (hasSpaces) {
-                System.out.println("Username shouldn't have any spaces");
+                JOptionPane.showMessageDialog(null, "Username shouldn't have any spaces.",
+                        "Invalid Password", JOptionPane.ERROR_MESSAGE);
+                validDetails = false;
+            }
+            if (checkSignupDetails(usernameField.getText())) {
+                JOptionPane.showMessageDialog(null, "Username already exists.",
+                        "Invalid Password", JOptionPane.ERROR_MESSAGE);
                 validDetails = false;
             }
             if (validDetails) {
