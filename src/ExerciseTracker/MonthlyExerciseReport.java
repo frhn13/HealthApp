@@ -3,16 +3,19 @@ package ExerciseTracker;
 import MainPage.MainMenu;
 
 import javax.swing.*;
+import javax.swing.plaf.ColorUIResource;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import static Constants.Constants.Fonts.*;
 import static Constants.Constants.FrameSizes.DEFAULT_SIZE;
 import static Files.FileFunctions.readFromExerciseFile;
 
-public class MonthlyExerciseReport extends JFrame implements ActionListener {
+public class MonthlyExerciseReport extends JFrame implements ActionListener, MouseListener {
 
     String username;
     JPanel topPanel;
@@ -68,14 +71,17 @@ public class MonthlyExerciseReport extends JFrame implements ActionListener {
         viewReportButton = new JButton("Generate Report");
         viewReportButton.setFont(PREV_EXERCISE_FONT);
         viewReportButton.addActionListener(this);
+        viewReportButton.addMouseListener(this);
         viewReportButton.setSize(200, 50);
         exerciseButton = new JButton("Enter Another Exercise");
         exerciseButton.setFont(PREV_EXERCISE_FONT);
         exerciseButton.addActionListener(this);
+        exerciseButton.addMouseListener(this);
         exerciseButton.setSize(200, 50);
         mainMenuButton = new JButton("Return to Main Menu");
         mainMenuButton.setFont(PREV_EXERCISE_FONT);
         mainMenuButton.addActionListener(this);
+        mainMenuButton.addMouseListener(this);
         mainMenuButton.setSize(200, 50);
 
         topPanel = new JPanel(new GridLayout(2, 1, 10, 10));
@@ -169,5 +175,40 @@ public class MonthlyExerciseReport extends JFrame implements ActionListener {
             this.dispose();
             new MainMenu(username);
         }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        if (e.getSource() == viewReportButton)
+            viewReportButton.setBackground(new Color(0x04AF70));
+        if (e.getSource() == mainMenuButton)
+            mainMenuButton.setBackground(new Color(0x04AF70));
+        if (e.getSource() == exerciseButton)
+            exerciseButton.setBackground(new Color(0x04AF70));
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        if (e.getSource() == viewReportButton)
+            viewReportButton.setBackground(new ColorUIResource(238,238,238));
+        if (e.getSource() == mainMenuButton)
+            mainMenuButton.setBackground(new ColorUIResource(238,238,238));
+        if (e.getSource() == exerciseButton)
+            exerciseButton.setBackground(new ColorUIResource(238,238,238));
     }
 }

@@ -3,9 +3,12 @@ package Login;
 import MainPage.MainMenu;
 
 import javax.swing.*;
+import javax.swing.plaf.ColorUIResource;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import static Constants.Constants.Fonts.LOGIN_FONT;
 import static Constants.Constants.Fonts.TITLE_FONT;
@@ -13,7 +16,7 @@ import static Constants.Constants.FrameSizes.LOGIN_SIZE;
 import static Constants.Constants.FrameSizes.LOGIN_PANEL_SIZE;
 import static Files.FileFunctions.checkLoginFile;
 
-public class LoginPage extends JFrame implements ActionListener {
+public class LoginPage extends JFrame implements ActionListener, MouseListener {
 
     JPanel titlePanel;
     JPanel usernamePanel;
@@ -56,6 +59,8 @@ public class LoginPage extends JFrame implements ActionListener {
         signupPage.setFont(LOGIN_FONT);
         loginButton.addActionListener(this);
         signupPage.addActionListener(this);
+        loginButton.addMouseListener(this);
+        signupPage.addMouseListener(this);
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(LOGIN_SIZE);
@@ -74,20 +79,51 @@ public class LoginPage extends JFrame implements ActionListener {
         this.add(passwordPanel);
         this.add(loginPanel);
         this.setVisible(true);
-
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == loginButton) {
+            loginButton.setBackground(Color.GREEN);
             if (checkLoginFile(usernameField.getText(), passwordField.getText())) {
                 this.dispose();
                 new MainMenu(usernameField.getText());
             }
         }
         if (e.getSource() == signupPage) {
+            signupPage.setBackground(Color.GREEN);
             this.dispose();
             new SignupPage();
         }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        if (e.getSource() == loginButton) {
+            loginButton.setBackground(new Color(0x04AF70));
+        }
+        if (e.getSource() == signupPage) {
+            signupPage.setBackground(new Color(0x04AF70));
+        }
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        if (e.getSource() == loginButton)
+            loginButton.setBackground(new ColorUIResource(238,238,238));
+        if (e.getSource() == signupPage)
+            signupPage.setBackground(new ColorUIResource(238,238,238));
     }
 }

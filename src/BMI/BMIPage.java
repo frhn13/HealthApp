@@ -3,9 +3,12 @@ package BMI;
 import MainPage.MainMenu;
 
 import javax.swing.*;
+import javax.swing.plaf.ColorUIResource;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -15,7 +18,7 @@ import static Constants.Constants.FrameSizes.LOGIN_PANEL_SIZE;
 import static Constants.Constants.FrameSizes.LOGIN_SIZE;
 import static Files.FileFunctions.writeToBMIFile;
 
-public class BMIPage extends JFrame implements ActionListener {
+public class BMIPage extends JFrame implements ActionListener, MouseListener {
 
     String username;
     JLabel title;
@@ -65,6 +68,9 @@ public class BMIPage extends JFrame implements ActionListener {
         submitBMI.addActionListener(this);
         viewPreviousBMI.addActionListener(this);
         returnButton.addActionListener(this);
+        submitBMI.addMouseListener(this);
+        viewPreviousBMI.addMouseListener(this);
+        returnButton.addMouseListener(this);
 
         titlePanel = new JPanel(new BorderLayout());
         titlePanel.setSize(LOGIN_PANEL_SIZE);
@@ -142,5 +148,40 @@ public class BMIPage extends JFrame implements ActionListener {
             this.dispose();
             new MainMenu(username);
         }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        if (e.getSource() == submitBMI)
+            submitBMI.setBackground(new Color(0x04AF70));
+        if (e.getSource() == viewPreviousBMI)
+            viewPreviousBMI.setBackground(new Color(0x04AF70));
+        if (e.getSource() == returnButton)
+            returnButton.setBackground(new Color(0x04AF70));
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        if (e.getSource() == submitBMI)
+            submitBMI.setBackground(new ColorUIResource(238,238,238));
+        if (e.getSource() == viewPreviousBMI)
+            viewPreviousBMI.setBackground(new ColorUIResource(238,238,238));
+        if (e.getSource() == returnButton)
+            returnButton.setBackground(new ColorUIResource(238,238,238));
     }
 }

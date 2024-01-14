@@ -1,9 +1,12 @@
 package Login;
 
 import javax.swing.*;
+import javax.swing.plaf.ColorUIResource;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Arrays;
 
 import static Constants.Constants.Fonts.LOGIN_FONT;
@@ -13,7 +16,7 @@ import static Constants.Constants.FrameSizes.SIGNUP_PANEL_SIZE;
 import static Files.FileFunctions.checkSignupDetails;
 import static Files.FileFunctions.checkSignupFile;
 
-public class SignupPage extends JFrame implements ActionListener {
+public class SignupPage extends JFrame implements ActionListener, MouseListener {
 
     JPanel titlePanel;
     JPanel usernamePanel;
@@ -65,6 +68,8 @@ public class SignupPage extends JFrame implements ActionListener {
         signupButton.setFont(LOGIN_FONT);
         loginPage.addActionListener(this);
         signupButton.addActionListener(this);
+        loginPage.addMouseListener(this);
+        signupButton.addMouseListener(this);
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(LOGIN_SIZE);
@@ -149,5 +154,36 @@ public class SignupPage extends JFrame implements ActionListener {
             this.dispose();
             new LoginPage();
         }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        if (e.getSource() == signupButton)
+            signupButton.setBackground(new Color(0x04AF70));
+        if (e.getSource() == loginPage)
+            loginPage.setBackground(new Color(0x04AF70));
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        if (e.getSource() == signupButton)
+            signupButton.setBackground(new ColorUIResource(238,238,238));
+        if (e.getSource() == loginPage)
+            loginPage.setBackground(new ColorUIResource(238,238,238));
     }
 }

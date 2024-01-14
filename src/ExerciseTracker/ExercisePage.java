@@ -3,9 +3,12 @@ package ExerciseTracker;
 import MainPage.MainMenu;
 
 import javax.swing.*;
+import javax.swing.plaf.ColorUIResource;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -15,7 +18,7 @@ import static Constants.Constants.Fonts.*;
 import static Constants.Constants.FrameSizes.*;
 import static Files.FileFunctions.writeToExerciseFile;
 
-public class ExercisePage extends JFrame implements ActionListener {
+public class ExercisePage extends JFrame implements ActionListener, MouseListener {
 
     String username;
     JPanel titlePanel;
@@ -63,15 +66,19 @@ public class ExercisePage extends JFrame implements ActionListener {
         dateTextField.setFont(EXERCISE_FONT);
         submitExerciseButton = new JButton("Submit Exercise");
         submitExerciseButton.addActionListener(this);
+        submitExerciseButton.addMouseListener(this);
         submitExerciseButton.setFont(PREV_EXERCISE_FONT);
         mainMenuButton = new JButton("Return to Main Menu");
         mainMenuButton.addActionListener(this);
+        mainMenuButton.addMouseListener(this);
         mainMenuButton.setFont(PREV_EXERCISE_FONT);
         previousExercisesButton = new JButton("View Previous Exercises");
         previousExercisesButton.addActionListener(this);
+        previousExercisesButton.addMouseListener(this);
         previousExercisesButton.setFont(PREV_EXERCISE_FONT);
         monthlyExercisesButton = new JButton("Monthly Exercise Report");
         monthlyExercisesButton.addActionListener(this);
+        monthlyExercisesButton.addMouseListener(this);
         monthlyExercisesButton.setFont(PREV_EXERCISE_FONT);
 
         titlePanel = new JPanel(new GridLayout(2, 1, 10, 10));
@@ -133,5 +140,44 @@ public class ExercisePage extends JFrame implements ActionListener {
             this.dispose();
             new MonthlyExerciseReport(username);
         }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        if (e.getSource() == submitExerciseButton)
+            submitExerciseButton.setBackground(new Color(0x04AF70));
+        if (e.getSource() == mainMenuButton)
+            mainMenuButton.setBackground(new Color(0x04AF70));
+        if (e.getSource() == monthlyExercisesButton)
+            monthlyExercisesButton.setBackground(new Color(0x04AF70));
+        if (e.getSource() == previousExercisesButton)
+            previousExercisesButton.setBackground(new Color(0x04AF70));
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        if (e.getSource() == submitExerciseButton)
+            submitExerciseButton.setBackground(new ColorUIResource(238,238,238));
+        if (e.getSource() == mainMenuButton)
+            mainMenuButton.setBackground(new ColorUIResource(238,238,238));
+        if (e.getSource() == monthlyExercisesButton)
+            monthlyExercisesButton.setBackground(new ColorUIResource(238,238,238));
+        if (e.getSource() == previousExercisesButton)
+            previousExercisesButton.setBackground(new ColorUIResource(238,238,238));
     }
 }

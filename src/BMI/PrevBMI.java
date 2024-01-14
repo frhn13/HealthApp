@@ -3,16 +3,19 @@ package BMI;
 import MainPage.MainMenu;
 
 import javax.swing.*;
+import javax.swing.plaf.ColorUIResource;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import static Constants.Constants.Fonts.*;
 import static Constants.Constants.FrameSizes.DEFAULT_SIZE;
 import static Files.FileFunctions.readFromBMIFile;
 
-public class PrevBMI extends JFrame implements ActionListener {
+public class PrevBMI extends JFrame implements ActionListener, MouseListener {
 
     String username;
     JPanel titlePanel;
@@ -46,6 +49,8 @@ public class PrevBMI extends JFrame implements ActionListener {
         mainMenuButton.setFont(BMI_FONT);
         setBMIButton.addActionListener(this);
         mainMenuButton.addActionListener(this);
+        setBMIButton.addMouseListener(this);
+        mainMenuButton.addMouseListener(this);
 
         titlePanel.add(titleLabel);
         buttonPanel.add(setBMIButton, BorderLayout.WEST);
@@ -71,5 +76,36 @@ public class PrevBMI extends JFrame implements ActionListener {
             new MainMenu(username);
             this.dispose();
         }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        if (e.getSource() == setBMIButton)
+            setBMIButton.setBackground(new Color(0x04AF70));
+        if (e.getSource() == mainMenuButton)
+            mainMenuButton.setBackground(new Color(0x04AF70));
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        if (e.getSource() == setBMIButton)
+            setBMIButton.setBackground(new ColorUIResource(238,238,238));
+        if (e.getSource() == mainMenuButton)
+            mainMenuButton.setBackground(new ColorUIResource(238,238,238));
     }
 }
